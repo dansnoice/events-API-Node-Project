@@ -13,6 +13,8 @@ const userRouter = require("./routes/users/usersRouter")
 app.use("/api/users", userRouter)
 const eventRouter = require("./routes/events/eventsRouter")
 app.use("/api/events", eventRouter)
+const bookingsRouter = require("./routes/bookings/bookingsRouter")
+app.use("/api/bookings", bookingsRouter)
 
 
 
