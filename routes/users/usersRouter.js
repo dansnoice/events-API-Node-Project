@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { createUser, getUsers, getUserById } = require("./usersController");
+const { createUser, getUsers, getUserById, userBookingPUT } = require("./usersController");
 
 router.post("/", async (req, res) => {
   try {
@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
 });
 router.get("/", async (req, res) => {
   try {
-    const users = await getUsers();
+    const users = await getUsers()
     res.json({ message: "Successfully found users", payload: users });
 } catch (error) {
     res.json({
@@ -38,6 +38,17 @@ router.get("/:userID", async (req, res) => {
           payload: error.message,
         });
         
-    }
-})
+      }
+    })
+//     router.put("/:userID", async (req,res) => {
+//       try {
+//         const user = await userBookingPUT(req.body)
+//       } catch (error) {
+//         res.json({
+//           message: "failure",
+//           payload: error.message,
+//         });
+        
+//   }
+// })
 module.exports = router;

@@ -18,7 +18,7 @@ const createUser = async (userData) => {
 
 const getUsers = async () =>{
     try {
-        const users = await User.find()
+        const users = await User.find().populate("bookedEvent", "title -_id");
         return users
     } catch (error) {
         throw error        
@@ -33,6 +33,16 @@ const getUserById = async (id) =>{
         throw error        
     }
 }
+const userBookedUpdate = async (newBooking) => {
+    try {
+        const userId = newBooking.user
+        const userBooking = newBooking._id
+        const user = await User.findByIdAndUpdate(userId, {$push: {bookedEvent: userBooking}},{new: true} )
+        return user
+    } catch (error) {
+        throw error
+    }
+}
 module.exports = {
-    createUser, getUsers, getUserById
+    createUser, getUsers, getUserById, userBookedUpdate
 }

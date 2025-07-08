@@ -1,5 +1,6 @@
 const Booking = require("./bookingModel");
 const { getEventById, bookedTickets } = require("../events/eventsController");
+const { userBookedUpdate } = require("../users/usersController");
 
 const createBooking = async (bookingData) => {
   try {
@@ -14,6 +15,7 @@ const createBooking = async (bookingData) => {
     };
     const newBooking = await Booking.create(calculatedBookingData);
     await bookedTickets(bookingData);
+    await userBookedUpdate(newBooking);
     return newBooking;
   } catch (error) {
     throw error;
@@ -22,7 +24,7 @@ const createBooking = async (bookingData) => {
 const getBookings = async () => {
   try {
     bookings = await Booking.find()
-      .populate("user", "username email -_id")
+      .populate("user", "-bookedEvent -_id")
       .populate("event", "title -_id");
     return bookings;
   } catch (error) {
