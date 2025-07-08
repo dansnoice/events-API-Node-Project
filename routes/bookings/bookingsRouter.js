@@ -19,7 +19,7 @@ router.post("/", async (req, res) => {
 })
 router.get("/", async (req,res) => {
     try {
-        const bookings = await getBookings()
+        const bookings = await getBookings(req.query.category)
         res.json({
       message: "Bookings have been successfully found",
       payload: bookings,
@@ -32,7 +32,6 @@ router.get("/", async (req,res) => {
         
     }
 })
-
 
 
 
