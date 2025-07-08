@@ -16,12 +16,12 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    bookedEvent: {
-      type: [mongoose.Schema.Types.ObjectId],
+    bookedEvent: [{
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Booking",
       autopopulate: true,
       default: []
-    },
+  }],
   },
   {
     timestamps: true,
